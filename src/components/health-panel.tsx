@@ -1,0 +1,8 @@
+import Link from "next/link";
+import { Check, HelpCircle, Minus, ShieldCheck } from "lucide-react";
+import type { Health } from "@/lib/types";
+import { Panel, ScopeNote } from "./ui/panel";
+
+export function HealthPanel({ health }: { health: Health }) {
+  return <Panel title="Maintenance signals" eyebrow="THE BIGGER PICTURE" action={<ShieldCheck size={19} className="text-primary" />} className="health-panel"><div className="health-summary"><div className="health-score"><strong>{health.score ?? "—"}</strong><span>/ 100</span></div><div><strong>{health.score === null ? "Not enough data" : health.score >= 75 ? "Foundations in place" : health.score >= 40 ? "A few things to explore" : "Take a closer look"}</strong><p>{health.earned} of {health.available} assessed points</p></div></div><div className="health-track"><span style={{ width: `${health.score ?? 0}%` }} /></div><div className="health-signals">{health.signals.map((signal) => <details key={signal.id} className="health-signal"><summary><span className={`signal-state ${signal.passed === null ? "unknown" : signal.passed ? "present" : "absent"}`}>{signal.passed === null ? <HelpCircle size={14} /> : signal.passed ? <Check size={14} /> : <Minus size={14} />}</span><span>{signal.label}</span><span className="signal-points">{signal.passed === null ? "Unknown" : `${signal.passed ? signal.points : 0} / ${signal.points}`}</span></summary><p>{signal.reason}</p></details>)}</div><ScopeNote>A maintenance checklist, not a code quality or security verdict. <Link href="/methodology">See the weights and limitations.</Link></ScopeNote></Panel>;
+}
