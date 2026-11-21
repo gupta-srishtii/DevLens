@@ -27,11 +27,20 @@ export function markdownReport(analysis: Analysis) {
 
 export function downloadReport(analysis: Analysis, format: "json" | "md") {
   const body = format === "json" ? JSON.stringify(analysis, null, 2) : markdownReport(analysis);
-  const blob = new Blob([body], { type: format === "json" ? "application/json" : "text/markdown;charset=utf-8" });
+  downloadText(body, `devlens-${analysis.repository.full_name.replace("/", "-")}.${format}`, format === "json" ? "application/json" : "text/markdown;charset=utf-8");
+}
+
+export function downloadComparison(left: Analysis, right: Analysis) {
+  const body = `# DevLens repository comparison\n\nBoth repositories use the same bounded sampling methodology. Scores may have different assessed denominators. There is no universal winner.\n\n${markdownReport(left)}\n---\n\n${markdownReport(right)}`;
+  downloadText(body, "devlens-comparison.md", "text/markdown;charset=utf-8");
+}
+
+function downloadText(body: string, filename: string, type: string) {
+  const blob = new Blob([body], { type });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `devlens-${analysis.repository.full_name.replace("/", "-")}.${format}`;
+  link.download = filename;
   document.body.appendChild(link); link.click(); link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
