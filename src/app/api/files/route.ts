@@ -9,6 +9,10 @@ export async function GET(request: Request) {
     const params = new URL(request.url).searchParams;
     const ref = repositorySchema.parse(params.get("repo"));
     const path = filePathSchema.parse(params.get("path") ?? "");
-    return NextResponse.json(await repositoryContents(ref, path), { headers: { "Cache-Control": "private, max-age=60" } });
-  } catch (error) { return apiError(error); }
+    return NextResponse.json(await repositoryContents(ref, path), {
+      headers: { "Cache-Control": "private, max-age=60" },
+    });
+  } catch (error) {
+    return apiError(error);
+  }
 }

@@ -8,6 +8,10 @@ export async function GET(request: Request) {
   try {
     guardRequest(request);
     const ref = repositorySchema.parse(new URL(request.url).searchParams.get("repo"));
-    return NextResponse.json(await analyzeRepository(ref), { headers: { "Cache-Control": "private, max-age=60" } });
-  } catch (error) { return apiError(error); }
+    return NextResponse.json(await analyzeRepository(ref), {
+      headers: { "Cache-Control": "private, max-age=60" },
+    });
+  } catch (error) {
+    return apiError(error);
+  }
 }
