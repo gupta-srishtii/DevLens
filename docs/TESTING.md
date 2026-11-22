@@ -24,6 +24,8 @@ React tests exercise input feedback, navigation, filtering, unavailable data, si
 
 Browser projects use a 1440×1000 desktop viewport and an iPhone-sized touch viewport running Chromium. These are not claims of Safari or real-device testing. On this Windows machine tests use installed Microsoft Edge; Linux CI downloads Playwright Chromium. Trace and failure screenshots are retained under ignored report directories. The mobile screenshot-only documentation case is intentionally skipped, since documentation images use desktop dimensions.
 
+The complete Linux workflow passed in [run 44993026837](https://github.com/gupta-srishtii/DevLens/actions/runs/44993026837), independently confirming clean installation, formatting, application checks, coverage and browser journeys for source revision `f5a620e`.
+
 ## Screenshots
 
 `docs/screenshots/landing.png` is the application landing page. `dashboard.png` and `comparison.png` use deterministic test fixtures; the repository description explicitly labels them test data. They are documentation illustrations, not live GitHub metrics. The screenshot case regenerates them during browser testing.

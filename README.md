@@ -2,6 +2,8 @@
 
 **See beyond the code.** A public GitHub repository intelligence workspace built with Next.js, TypeScript, and a little more perspective.
 
+[![Quality](https://github.com/gupta-srishtii/DevLens/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gupta-srishtii/DevLens/actions/workflows/ci.yml)
+
 ![DevLens landing page](docs/screenshots/landing.png)
 
 Explore a repository's code, people and momentum without bouncing between tabs. DevLens brings GitHub's public data into a responsive midnight workspace, with transparent samples, inspectable maintenance signals and portable reports.
